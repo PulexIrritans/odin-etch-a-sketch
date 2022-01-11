@@ -14,8 +14,13 @@
         <div>
             <aside>
                 <h1>Draw something!</h1>
-                <button>Clear board</button>
-                <button>Change color</button>
+                <button id="clear-btn">Clear board</button>
+                <button id="rainbow-btn">Rainbow mode</button>
+                <div>
+                    <label for="grid-color">Change pen color</label>
+                    <input type="color" id="grid-color" name="head"
+                           value="#000000">
+                </div>
                 <div class="slidecontainer">
                     <input type="range" min="1" max="100" value="50" class="slider" id="myRange">
                   </div>
