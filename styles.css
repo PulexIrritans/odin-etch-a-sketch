@@ -1,15 +1,12 @@
 html, body {
-    background-color: rgb(80, 76, 20);
+    background-color: rgb(58, 14, 40);
+    color: whitesmoke;
 }
 
 main div {
     display: flex;
     justify-content: space-around;
 }
-
-/* aside {
-    width: 200px;
-} */
 
 ol {
     display: grid;
@@ -24,5 +21,6 @@ ol {
 
 li {
     background-color: rgb(226, 240, 235);
+    border: 0.5px solid black;
 }
 
