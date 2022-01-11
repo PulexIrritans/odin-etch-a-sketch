@@ -35,7 +35,7 @@ slider.oninput = function() {
      selectedSize = numberOfColumnsAndRows**2;
      clearGrid();
      createGrid(selectedSize, numberOfColumnsAndRows);
-
+     addEventListenerToGridItems();
 };
 
 // Color for a grid element changes when the mouse at least hovered over it once.
@@ -50,7 +50,12 @@ function changeBackgroundColor(e) {
 
     // Seems that the event listener isn't added to the list elements anymore when grid is generated anew based on slider change...
 
-const gridElements = document.querySelectorAll("li");    
+
+function addEventListenerToGridItems() {
+    const gridElements = document.querySelectorAll("li");    
 gridElements.forEach((element) => {
     element.addEventListener("mouseenter", changeBackgroundColor)
 });
+}    
+
+addEventListenerToGridItems();
