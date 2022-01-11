@@ -24,7 +24,7 @@ function clearGrid() {
 };
 
 createGrid(selectedSize, numberOfColumnsAndRows);
-
+addEventListeners();
 
 
 // Update the current slider value (each time you drag the slider handle) and call the createGrid function in order to generate
@@ -35,7 +35,7 @@ slider.oninput = function() {
      selectedSize = numberOfColumnsAndRows**2;
      clearGrid();
      createGrid(selectedSize, numberOfColumnsAndRows);
-
+     addEventListeners();
 };
 
 // Color for a grid element changes when the mouse at least hovered over it once.
@@ -49,8 +49,14 @@ function changeBackgroundColor(e) {
 };
 
     // Seems that the event listener isn't added to the list elements anymore when grid is generated anew based on slider change...
+    // put this into a function so you can call it initially
+    // and also after recreating grid. Otherwise gridElements will always
+    // stay the same inital li array
+function addEventListeners() {
+    const gridElements = document.querySelectorAll("li");    
+    console.log(gridElements)
+    gridElements.forEach((element) => {
+        element.addEventListener("mouseenter", changeBackgroundColor)
+    });
+}
 
-const gridElements = document.querySelectorAll("li");    
-gridElements.forEach((element) => {
-    element.addEventListener("mouseenter", changeBackgroundColor)
-});
