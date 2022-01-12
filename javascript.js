@@ -1,10 +1,10 @@
 
 const sliderElement = document.getElementById("myRange");
+const sliderValueElement = document.getElementById("rangeValue");
 const clearButtonElement = document.getElementById("clear-btn");
 const colorPickerElement = document.getElementById("grid-color");
 const orderedListElement = document.querySelector("ol");
 const rainbowModeBtnElement = document.getElementById("rainbow-btn");
-const gradientModeBtnElement = document.getElementById("gradient-btn");
 const defaultBackgroundColor = "rgb(255, 255, 255)";
 
 let pickedPenColor = colorPickerElement.value;
@@ -85,6 +85,13 @@ sliderElement.oninput = function() {
      createGrid(selectedSize, numberOfColumnsAndRows);
      addEventListenerToGridItems();
 };
+
+sliderElement.onChange= function() {
+    sliderValueElement.innerHTML = this.value+' x '+this.value;
+}
+sliderElement.onmousemove= function() {
+    sliderValueElement.innerHTML = this.value+' x '+this.value;
+}
 
 clearButtonElement.onclick = function() {
     const gridElements = document.querySelectorAll("li");   

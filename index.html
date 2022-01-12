@@ -5,6 +5,12 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Etch a sketch</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Gaegu:wght@400;700&family=Roboto:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
     <link rel="stylesheet" href="styles.css" />
     <script src="javascript.js" defer></script>
   </head>
@@ -13,31 +19,25 @@
     <main>
       <div class="overall-container">
         <aside>
-          <h1>Draw something!</h1>
+          <h1>Etch a sketch!</h1>
           <button id="clear-btn">Clear board</button>
           <button id="rainbow-btn">Rainbow mode</button>
           <div>
-            <label for="grid-color">Change pen color</label>
+            <label for="grid-color">Change pen color:</label>
             <input type="color" id="grid-color" name="head" value="#000000" />
           </div>
-          <div class="slidecontainer">
+          <div>
+            <label for="myRange">Change resolution:</label>
+            <span id="rangeValue">50 x 50</span>
             <input
+              class="range"
               type="range"
+              value="50"
               min="1"
               max="100"
-              value="50"
-              class="slider"
               id="myRange"
             />
           </div>
-          <!-- <div class="range-slider">
-            <span id="rs-bullet" class="rs-label">50</span>
-            <input id="rs-range-line" class="rs-range" type="range" value="50" min="1" max="100">
-            
-          </div>
-          <div class="box-minmax">
-            <span>1</span><span>100</span>
-          </div> -->
         </aside>
         <div id="painting">
           <ol></ol>
