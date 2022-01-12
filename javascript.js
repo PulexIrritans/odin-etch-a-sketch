@@ -4,12 +4,16 @@ const clearButtonElement = document.getElementById("clear-btn");
 const colorPickerElement = document.getElementById("grid-color");
 const orderedListElement = document.querySelector("ol");
 const rainbowModeBtnElement = document.getElementById("rainbow-btn");
+const gradientModeBtnElement = document.getElementById("gradient-btn");
+const defaultBackgroundColor = "rgb(255, 255, 255)";
+
 let pickedPenColor = colorPickerElement.value;
-const defaultBackgroundColor = "#FFFFFF";
 let selectedSize = sliderElement.value**2;
 let numberOfColumnsAndRows = sliderElement.value;
+let rainbowMode=false;
+let gradientMode=false;
 
-// createGrid function dynamically creates grid based on set value for selected size.
+// createGrid function dynamically creates grid based on set value for selected size. Default is set in HTML-Slider.
 
 function createGrid(totalSize, axisLength) {
     
@@ -20,16 +24,15 @@ function createGrid(totalSize, axisLength) {
     orderedListElement.setAttribute("style", "grid-template-columns: repeat("+axisLength+", 1fr); grid-template-rows: repeat("+axisLength+", 1fr)");
 };
 
-// clearGrid function erases all colors from the grid
+// clearGrid function deletes all items from the grid so it can be defined anew
 
 function clearGrid() {
     let orderedListElement = document.querySelector("ol");
      orderedListElement.innerHTML="";
-
 };
 
 
-// AddEventlistenerToGridItems will do what it says. Needs to be called again when the grid is reset, e.g. by slider or "Clear Button"
+// AddEventlistenerToGridItems will do what it says. Needs to be called again when the grid is reset by slider
 
 
 function addEventListenerToGridItems() {
@@ -44,13 +47,28 @@ gridElements.forEach((element) => {
 
 
 function changeBackgroundColor(e) {
-    console.log(e);
+    if (rainbowMode) {
+        e.target.style.backgroundColor=randomColor();
+    } else {
     e.target.style.backgroundColor=pickedPenColor;
+    }
+};
+
+// randomColor generates random rgb that is being used as pen color for each grid item in rainbow mode.
+
+function randomColor() {
+
+    const max=255;
+    r=Math.floor(Math.random() * max);
+    g=Math.floor(Math.random() * max);
+    b=Math.floor(Math.random() * max);
+    console.log(`rgb(${r},${g},${b})`)
+    return `rgb(${r},${g},${b})`;
 };
 
 
 
-// Here the board gets created initially by calling the functions.
+// Here the board gets created initially by calling the respective functions.
 
 
 createGrid(selectedSize, numberOfColumnsAndRows);
@@ -58,8 +76,7 @@ addEventListenerToGridItems();
 
 
 
-// Update the current slider value (each time you drag the slider handle) and call the createGrid function in order to generate
-// a new grid based on the slider value.
+// In the following section all the event listeners for the user settings can be found
 
 sliderElement.oninput = function() {
      numberOfColumnsAndRows = this.value;
@@ -77,8 +94,12 @@ clearButtonElement.onclick = function() {
 };
 
 colorPickerElement.oninput = function () {
+    rainbowMode=false;
+    gradientMode=false;
     pickedPenColor = this.value;
     return pickedPenColor;
 }
 
-
+rainbowModeBtnElement.onclick = function() {
+    rainbowMode=true;
+};
