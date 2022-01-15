@@ -5,7 +5,7 @@ This was all about practicing DOM manipulation on various inputs.
 I managed to find the solution for the core functionality really quick.
 
 The biggest challenge was when the "pen" wouldn't work after usage of the slider.
-I learned that I had to add the event listeners to the items again as the above function would clear all grid items and add them anew.
+I learned that I had to add the event listeners to the items again as the above slider event was designed to clear all grid items and add them anew.
 
 For the first time I also tried to make the UI really pretty.
 Still facing some challenges when it comes to position items as I want.
