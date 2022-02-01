@@ -3,15 +3,18 @@ const sliderElement = document.getElementById("myRange");
 const sliderValueElement = document.getElementById("rangeValue");
 const clearButtonElement = document.getElementById("clear-btn");
 const colorPickerElement = document.getElementById("grid-color");
+const gradientModeButtonElement = document.getElementById("gradient-btn");
 const orderedListElement = document.querySelector("ol");
 const rainbowModeBtnElement = document.getElementById("rainbow-btn");
-const defaultBackgroundColor = "rgb(255, 255, 255)";
+const defaultBackgroundColor = "rgba(255, 255, 255, 1)";
 
 let pickedPenColor = colorPickerElement.value;
 let selectedSize = sliderElement.value**2;
 let numberOfColumnsAndRows = sliderElement.value;
 let rainbowMode=false;
 let gradientMode=false;
+let initialGradient = 0;
+
 
 // createGrid function dynamically creates grid based on set value for selected size. Default is set in HTML-Slider.
 
@@ -49,8 +52,12 @@ gridElements.forEach((element) => {
 function changeBackgroundColor(e) {
     if (rainbowMode) {
         e.target.style.backgroundColor=randomColor();
+        e.target.style.opacity = 1;
+    } else if (gradientMode) {
+        e.target.style.opacity=gradientColor(e);
     } else {
     e.target.style.backgroundColor=pickedPenColor;
+    e.target.style.opacity = 1;
     }
 };
 
@@ -62,8 +69,20 @@ function randomColor() {
     r=Math.floor(Math.random() * max);
     g=Math.floor(Math.random() * max);
     b=Math.floor(Math.random() * max);
-    console.log(`rgb(${r},${g},${b})`)
     return `rgb(${r},${g},${b})`;
+};
+
+
+// Gradient mode generates value for opacity starting from default 1 down to 0 with every event. Full opacity (value 0) means that black background is fully visible.
+
+function gradientColor(e) {
+    let opacity = window.getComputedStyle(e.target).opacity;
+    if (opacity>0) {
+        opacity = opacity-0.1;
+        return opacity;
+    } else {
+        return opacity;
+    }
 };
 
 
@@ -97,6 +116,7 @@ clearButtonElement.onclick = function() {
     const gridElements = document.querySelectorAll("li");   
     gridElements.forEach((element) => {
         element.style.backgroundColor=defaultBackgroundColor;
+        element.style.opacity=1;
 });
 };
 
@@ -108,5 +128,11 @@ colorPickerElement.oninput = function () {
 }
 
 rainbowModeBtnElement.onclick = function() {
+    gradientMode=false;
     rainbowMode=true;
+};
+
+gradientModeButtonElement.onclick = function() {
+    rainbowMode = false;
+    gradientMode = true;
 };
